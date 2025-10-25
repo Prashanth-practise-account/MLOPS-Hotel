@@ -1,5 +1,6 @@
 name: MLOps FastAPI CI/CD
-
+#name → Just a name for the workflow.
+#on → When this workflow should run. Here, it runs every time you push code or create a PR to main.
 on:
   push:
     branches:
@@ -7,50 +8,38 @@ on:
   pull_request:
     branches:
       - main
-
+#jobs → Defines tasks that the workflow should perform.
+#build-and-test → Job name (you can name it anything).
+#runs-on → Runs on a Linux VM provided by GitHub.
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout code
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      #This pulls your code from GitHub into the VM so the workflow can work on it.
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    # Step 2: Set up Python
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+      # Sets up Python inside the VM. Useful if you want to run Python scripts or tests before or after Docker.
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
 
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      # Builds your Docker image using the Dockerfile in your repo.
+      #-t hotel-mlops:latest → Tags the image for easy reference.
+      - name: Build Docker image
+        run: docker build -t hotel-mlops:latest .
 
-    # Step 4: Run tests (optional)
-    - name: Run Pytest
-      run: |
-        pip install pytest
-        pytest --maxfail=1 --disable-warnings -q
+      # Runs the container in the background.
+      #Waits 10 seconds for FastAPI to start.
+      #Sends a test request to /docs to ensure the API is running.
+      #Stops and removes the test container to clean up.
+      - name: Run FastAPI container
+        run: |
+          docker run -d -p 8000:8000 --name hotel-mlops-test hotel-mlops:latest
+          sleep 10
+          curl -f http://localhost:8000/docs
+          docker stop hotel-mlops-test
+          docker rm hotel-mlops-test
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Retrain Model (optional)
-      run: |
-        python main.py retrain  # or call your retrain function in a script
