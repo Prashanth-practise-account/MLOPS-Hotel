@@ -1,0 +1,3 @@
+"timestamp","lead_time","stays_in_weekend_nights","stays_in_week_nights","arrival_date_month","adults","children","babies","prediction","actual_is_canceled"
+"2025-10-25 19:58:13.816478","10","2","3","October","2","1","0","0","1.0"
+"2025-10-25 20:01:12.970047","10","2","3","October","2","1","0","0",""

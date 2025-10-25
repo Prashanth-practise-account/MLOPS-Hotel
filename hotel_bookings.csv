@@ -1,0 +1,7 @@
+hotel,is_canceled,lead_time,arrival_date_year,arrival_date_month,arrival_date_day_of_month,stays_in_week_nights,stays_in_weekend_nights,adults,children,babies,meal,country,market_segment,distribution_channel,is_repeated_guest,previous_cancellations,previous_bookings_not_canceled,reserved_room_type,deposit_type,agent,company,customer_type,adr,reservation_status,reservation_status_date
+Resort Hotel,0,342,2017,July,1,0,0,2,0,0,B&B,PRT,Online TA,TA/TO,0,0,0,A,No Deposit,9,40,Transient,0.0,Check-Out,2017-07-01
+City Hotel,1,737,2017,July,1,0,0,1,0,0,BB,POL,Direct,Direct,0,0,0,C,No Deposit,, ,Transient-Party,0.0,Check-Out,2017-07-01
+Resort Hotel,0,7,2017,July,1,0,0,2,0,0,FB,GB,Corporate,Corporate,0,0,0,B,No Deposit,9,40,Contract,100.0,Check-Out,2017-07-01
+City Hotel,0,13,2017,July,1,0,1,2,0,0,HB,FR,Direct,Direct,0,0,0,D,No Deposit,7,15,Transient,75.0,Check-Out,2017-07-02
+Resort Hotel,1,14,2017,July,2,1,0,2,0,0,BB,ES,Online TA,TA/TO,0,0,0,A,No Deposit,9,40,Transient,0.0,Check-Out,2017-07-02
+City Hotel,0,2,2017,July,2,2,2,1,0,0,FB,DE,Corporate,Corporate,0,0,0,C,No Deposit,7,15,Contract,200.0,Check-Out,2017-07-03
